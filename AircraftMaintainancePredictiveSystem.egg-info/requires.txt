@@ -10,5 +10,3 @@ python-dotenv==1.2.1
 docker==7.1.0
 hyperopt==0.2.7
 ipykernel==6.29.5
-
--e .
