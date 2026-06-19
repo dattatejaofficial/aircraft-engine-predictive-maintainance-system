@@ -3,7 +3,9 @@ project:
   version: 0.0.1
 
 artifacts:
-  artifact_dir: artifacts
+  artifact_dir : artifacts
+  etl_artifact_dir : etl
+  timestamp_format : "%d_%m_%Y_%H_%M_%S"
 
 logging:
   logs_dir: logs

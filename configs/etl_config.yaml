@@ -1,0 +1,4 @@
+database_details:
+  host: localhost
+  port: 3306
+  database: aircraft_db
