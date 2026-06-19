@@ -15,6 +15,8 @@ class ConfigurationManager:
         
         self.artifact_dir_name = self.artifact_config['artifact_dir']
         self.artifact_dir = os.path.join(self.artifact_dir_name, self.timestamp)
+
+        self.feature_store_dir = self.artifact_config['feature_store_dir']
         
         self.etl_artifact_name = self.artifact_config['etl_artifact_dir']
         self.etl_artifact_dir = os.path.join(self.artifact_dir, self.etl_artifact_name)
@@ -37,8 +39,8 @@ class DatabaseConfig:
         self.password = os.getenv('MYSQL_PASSWORD')
 
 class DataExtractionConfig:
-    def __init__(self, configuration_manager : ConfigurationManager, data_extraction_config_filepath = 'configs/etl_config.yaml'):
-        with open(data_extraction_config_filepath, 'r') as file:
+    def __init__(self, configuration_manager : ConfigurationManager, data_extraction_config_file_path = 'configs/etl_config.yaml'):
+        with open(data_extraction_config_file_path, 'r') as file:
             config = yaml.safe_load(file)
         
         data_extraction_config = config['data_extraction_details']
@@ -48,8 +50,12 @@ class DataExtractionConfig:
         self.test_data_path = os.path.join(self.raw_data_dir, data_extraction_config['test_data_path'])
         self.test_target_path = os.path.join(self.raw_data_dir, data_extraction_config['test_target_path'])
 
-        self.extracted_data_dir = os.path.join(
+        self.data_extraction_dir = os.path.join(
             configuration_manager.etl_artifact_dir,
+            data_extraction_config['data_extraction_dir']
+        )
+        self.extracted_data_dir = os.path.join(
+            self.data_extraction_dir,
             data_extraction_config['extracted_data_dir'])
         self.extracted_train_data_path = os.path.join(
             self.extracted_data_dir,
@@ -63,6 +69,67 @@ class DataExtractionConfig:
             self.extracted_data_dir,
             data_extraction_config['extracted_test_target_path']
         )
-
+        
         self.feature_columns = data_extraction_config['feature_columns']
         self.target_column = data_extraction_config['target_column']
+
+class DataTransformationConfig:
+    def __init__(self, configuration_manager : ConfigurationManager, data_transformation_config_file_path = 'configs/etl_config.yaml'):
+        with open(data_transformation_config_file_path,'r') as file:
+            config = yaml.safe_load(file)
+
+        data_transformation_config = config['data_transformation_details']
+
+        self.data_schema_path = os.path.join(
+            data_transformation_config['data_schema_dir'],
+            data_transformation_config['data_schema_path']
+        )
+
+        self.data_transformation_dir = os.path.join(
+            configuration_manager.etl_artifact_dir,
+            data_transformation_config['data_transformation_dir']
+        )
+
+        self.transformed_data_dir = os.path.join(
+            self.data_transformation_dir,
+            data_transformation_config['transformed_data_dir']
+        )
+        self.transformed_train_data_path = os.path.join(
+            self.transformed_data_dir,
+            data_transformation_config['transformed_train_data_path']
+        )
+        self.transformed_test_data_path = os.path.join(
+            self.transformed_data_dir,
+            data_transformation_config['transformed_test_data_path']
+        )
+        self.transformed_test_target_path = os.path.join(
+            self.transformed_data_dir,
+            data_transformation_config['transformed_test_target_path']
+        )
+
+        self.validation_report_dir = os.path.join(
+            self.data_transformation_dir,
+            data_transformation_config['validation_report_dir']
+        )
+        self.validation_report_path = os.path.join(
+            self.validation_report_dir,
+            data_transformation_config['validation_report_path']
+        )
+
+        self.feature_scaler_path = os.path.join(
+            configuration_manager.feature_store_dir,
+            data_transformation_config['min_max_scaler_path']
+        )
+        self.target_scaler_path = os.path.join(
+            configuration_manager.feature_store_dir,
+            data_transformation_config['standard_scaler_path']
+        )
+
+        self.exclude_columns = data_transformation_config['exclude_columns']
+        self.feature_columns = data_transformation_config['feature_columns']
+        self.degrade_up_columns = data_transformation_config['degrade_up_columns']
+        self.degrade_down_columns = data_transformation_config['degrade_down_columns']
+        self.target_column = data_transformation_config['target_column']
+        self.engine_column = data_transformation_config['engine_column']
+        self.cycle_column = data_transformation_config['cycle_column']
+        self.target_cap = data_transformation_config['target_cap']

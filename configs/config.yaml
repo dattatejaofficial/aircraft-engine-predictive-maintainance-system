@@ -4,6 +4,7 @@ project:
 
 artifacts:
   artifact_dir : artifacts
+  feature_store_dir : feature_store
   etl_artifact_dir : etl
   timestamp_format : "%d_%m_%Y_%H_%M_%S"
 

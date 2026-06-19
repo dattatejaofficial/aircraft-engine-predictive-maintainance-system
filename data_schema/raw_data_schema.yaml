@@ -1,0 +1,82 @@
+feature_columns:
+  engine_id:
+    dtype : int64
+  
+  cycle:
+    dtype : int64
+  
+  op_set_1:
+    dtype : float64
+  
+  op_set_2:
+    dtype : float64
+  
+  op_set_3:
+    dtype : float64
+  
+  sensor_1:
+    dtype : float64
+  
+  sensor_2:
+    dtype : float64
+
+  sensor_3:
+    dtype : float64
+  
+  sensor_4:
+    dtype : float64
+  
+  sensor_5:
+    dtype : float64
+  
+  sensor_6:
+    dtype : float64
+  
+  sensor_7:
+    dtype : float64
+  
+  sensor_8:
+    dtype : float64
+  
+  sensor_9:
+    dtype : float64
+  
+  sensor_10:
+    dtype : float64
+  
+  sensor_11:
+    dtype : float64
+  
+  sensor_12:
+    dtype : float64
+  
+  sensor_13:
+    dtype : float64
+  
+  sensor_14:
+    dtype : float64
+  
+  sensor_15:
+    dtype : float64
+  
+  sensor_16:
+    dtype : float64
+  
+  sensor_17:
+    dtype : int64
+  
+  sensor_18:
+    dtype : int64
+  
+  sensor_19:
+    dtype : float64
+  
+  sensor_20:
+    dtype : float64
+  
+  sensor_21:
+    dtype : float64
+  
+target_column:
+  RUL:
+    dtype: int64

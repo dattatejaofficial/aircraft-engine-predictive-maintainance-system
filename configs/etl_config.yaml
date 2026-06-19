@@ -10,7 +10,8 @@ data_extraction_details:
   test_data_path : test_FD001.txt
   test_target_path : RUL_FD001.txt
 
-  extracted_data_dir : data_extraction
+  data_extraction_dir : data_extraction
+  extracted_data_dir : data
   
   extracted_train_data_path : train_data.csv
   extracted_test_data_path : test_data.csv
@@ -18,3 +19,28 @@ data_extraction_details:
 
   feature_columns : ['engine_id','cycle','op_set_1','op_set_2','op_set_3','sensor_1','sensor_2','sensor_3','sensor_4','sensor_5','sensor_6','sensor_7','sensor_8','sensor_9','sensor_10','sensor_11','sensor_12','sensor_13','sensor_14','sensor_15','sensor_16','sensor_17','sensor_18','sensor_19','sensor_20','sensor_21']
   target_column : ['RUL']
+
+data_transformation_details:
+  data_transformation_dir : data_transformation
+  transformed_data_dir : data
+  validation_report_dir : reports
+
+  data_schema_dir : data_schema  
+  data_schema_path : raw_data_schema.yaml
+
+  validation_report_path : raw_data_validation_report.json
+  transformed_train_data_path : train_data.csv
+  transformed_test_data_path : test_data.csv
+  transformed_test_target_path : test_data_target.csv
+
+  min_max_scaler_path : min_max_scaler.pkl
+  standard_scaler_path : standard_scaler.pkl
+
+  exclude_columns : ['op_set_1','op_set_2','op_set_3','sensor_1','sensor_5','sensor_6','sensor_10','sensor_16','sensor_18','sensor_19']
+  feature_columns : ['sensor_2', 'sensor_3', 'sensor_4', 'sensor_7', 'sensor_8', 'sensor_9', 'sensor_11', 'sensor_12', 'sensor_13', 'sensor_14', 'sensor_15', 'sensor_17', 'sensor_20', 'sensor_21']
+  degrade_up_columns : ['sensor_4','sensor_11','sensor_12','sensor_15','sensor_20','sensor_21']
+  degrade_down_columns : ['sensor_2','sensor_3','sensor_7','sensor_8','sensor_9','sensor_13','sensor_14','sensor_17']
+  target_column : 'RUL'
+  engine_column : 'engine_id'
+  cycle_column : 'cycle'
+  target_cap : 125

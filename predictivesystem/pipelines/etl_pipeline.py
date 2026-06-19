@@ -2,10 +2,11 @@ import sys
 from predictivesystem.logging.logger import logging
 from predictivesystem.exception.exception import PredicitiveMaintainanceException
 
-from predictivesystem.entity.config_entity import ConfigurationManager, DataExtractionConfig
-from predictivesystem.entity.artifact_entity import DataExtractionArtifact
+from predictivesystem.entity.config_entity import ConfigurationManager, DataExtractionConfig, DataTransformationConfig
+from predictivesystem.entity.artifact_entity import DataExtractionArtifact, DataTransformationArtifact
 
 from predictivesystem.components.etl.data_extraction import DataExtraction
+from predictivesystem.components.etl.data_transformation import DataTransformation
 
 class ETLPipeline:
     def __init__(self):
@@ -22,10 +23,22 @@ class ETLPipeline:
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)
     
+    def start_data_transformation(self, data_extraction_artifact : DataExtractionArtifact) -> DataTransformationArtifact:
+        try:
+            data_transformation_config = DataTransformationConfig(configuration_manager = self.config_manager)
+            data_transformation = DataTransformation(data_extraction_artifact = data_extraction_artifact, data_transformation_config = data_transformation_config)
+            data_transformation_artifact = data_transformation.initiate_data_transformation()
+
+            return data_transformation_artifact
+        
+        except Exception as e:
+            raise PredicitiveMaintainanceException(e, sys)
+    
     def run_pipeline(self):
         try:
             logging.info("Initiating ETL Process")
             data_extraction_artifact = self.start_data_extraction()
+            data_transformation_artifact = self.start_data_transformation(data_extraction_artifact)
         
         except Exception as e:
             raise PredicitiveMaintainanceException(e,sys)
