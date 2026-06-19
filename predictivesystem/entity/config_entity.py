@@ -20,6 +20,9 @@ class ConfigurationManager:
         
         self.etl_artifact_name = self.artifact_config['etl_artifact_dir']
         self.etl_artifact_dir = os.path.join(self.artifact_dir, self.etl_artifact_name)
+
+        self.ml_artifact_dir_name = self.artifact_config['ml_artifact_dir']
+        self.ml_artifact_dir = os.path.join(self.artifact_dir, self.ml_artifact_dir_name)
     
     @property
     def logging_config(self):
@@ -145,3 +148,39 @@ class DataLoadingConfig:
         self.train_features_table_name = data_loading_config['train_features_table_name']
         self.test_features_table_name = data_loading_config['test_features_table_name']
         self.test_targets_table_name = data_loading_config['test_targets_table_name']
+
+class DataIngestionConfig:
+    def __init__(self, configuration_manager : ConfigurationManager, database_config : DatabaseConfig, data_ingestion_config_file_path = "configs/ml_config.yaml"):
+        with open(data_ingestion_config_file_path, 'r') as file:
+            config = yaml.safe_load(file)
+        
+        data_ingestion_config = config['data_ingestion_details']
+
+        self.database_config = database_config
+        self.train_features_table = data_ingestion_config['train_features_table_name']
+        self.test_features_table = data_ingestion_config['test_features_table_name']
+        self.test_targets_table = data_ingestion_config['test_targets_table_name']
+
+        self.data_ingestion_dir = os.path.join(
+            configuration_manager.ml_artifact_dir,
+            data_ingestion_config['data_ingestion_dir']
+        )
+
+        self.ingested_data_dir = os.path.join(
+            self.data_ingestion_dir,
+            data_ingestion_config['ingested_data_dir']
+        )
+        self.ingested_train_data_path = os.path.join(
+            self.ingested_data_dir,
+            data_ingestion_config['ingested_train_data_path']
+        )
+        self.ingested_test_data_path = os.path.join(
+            self.ingested_data_dir,
+            data_ingestion_config['ingested_test_data_path']
+        )
+        self.ingested_test_target_path = os.path.join(
+            self.ingested_data_dir,
+            data_ingestion_config['ingested_test_target_path']
+        )
+
+        self.exclude_columns = data_ingestion_config['exclude_columns']

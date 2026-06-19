@@ -58,6 +58,7 @@ class ETLPipeline:
             data_extraction_artifact = self.start_data_extraction()
             data_transformation_artifact = self.start_data_transformation(data_extraction_artifact)
             data_loading_artifact = self.start_data_loading(data_transformation_artifact)
+            logging.info("Completed ETL Process")
 
             return data_loading_artifact
         

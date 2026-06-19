@@ -6,6 +6,7 @@ artifacts:
   artifact_dir : artifacts
   feature_store_dir : feature_store
   etl_artifact_dir : etl
+  ml_artifact_dir : ml
   timestamp_format : "%d_%m_%Y_%H_%M_%S"
 
 logging:

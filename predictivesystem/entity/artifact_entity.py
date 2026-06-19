@@ -13,3 +13,9 @@ class DataTransformationArtifact:
     transformed_train_data_path : str
     transformed_test_data_path : str
     transformed_test_target_path : str
+
+@dataclass
+class DataIngestionArtifact:
+    ingested_train_data_path : str
+    ingested_test_data_path : str
+    ingested_test_target_path : str

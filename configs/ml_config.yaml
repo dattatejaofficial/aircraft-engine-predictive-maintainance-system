@@ -1,0 +1,13 @@
+data_ingestion_details:
+  train_features_table_name: train_features
+  test_features_table_name: test_features
+  test_targets_table_name: test_targets
+
+  data_ingestion_dir : data_ingestion
+  ingested_data_dir : data
+
+  ingested_train_data_path : train_data.csv
+  ingested_test_data_path : test_data.csv
+  ingested_test_target_path : test_data_target.csv
+
+  exclude_columns : ['created_at']

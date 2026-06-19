@@ -35,19 +35,20 @@ class DataLoader:
         
     def initiate_data_loading(self) -> None:
         try:
-            logging.info("Started Data Loading")
+            if self.data_transformation_artifact.validation_status == "PASS":
+                logging.info("Started Data Loading")
 
-            self.database_manager.connect()
+                self.database_manager.connect()
 
-            train_features = pd.read_csv(self.data_transformation_artifact.transformed_train_data_path)
-            test_features = pd.read_csv(self.data_transformation_artifact.transformed_test_data_path)
-            test_targets = pd.read_csv(self.data_transformation_artifact.transformed_test_target_path)
+                train_features = pd.read_csv(self.data_transformation_artifact.transformed_train_data_path)
+                test_features = pd.read_csv(self.data_transformation_artifact.transformed_test_data_path)
+                test_targets = pd.read_csv(self.data_transformation_artifact.transformed_test_target_path)
 
-            self._load_dataframe(df=train_features, table_name=self.data_loading_config.train_features_table_name)
-            self._load_dataframe(df=test_features, table_name=self.data_loading_config.test_features_table_name)
-            self._load_dataframe(df=test_targets, table_name=self.data_loading_config.test_targets_table_name)
+                self._load_dataframe(df=train_features, table_name=self.data_loading_config.train_features_table_name)
+                self._load_dataframe(df=test_features, table_name=self.data_loading_config.test_features_table_name)
+                self._load_dataframe(df=test_targets, table_name=self.data_loading_config.test_targets_table_name)
 
-            self.database_manager.commit()
+                self.database_manager.commit()
 
         except Exception as e:
             self.database_manager.rollback()

@@ -56,6 +56,27 @@ class DatabaseManager:
         
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)
+        
+    def fetch_one(self, query : str, params : tuple = None):
+        try:
+            cursor = self.execute(query=query, params=params)
+            columns = [column[0] for column in cursor.description]
+            row = cursor.fetchone()
+
+            if row is None:
+                return None
+            
+            return dict(zip(columns, row))
+
+        except Exception as e:
+            raise PredicitiveMaintainanceException(e, sys)
+    
+    def fetch_all(self, query : str, params : tuple = None):
+        cursor = self.execute(query=query, params=params)
+        columns = [column[0] for column in cursor.description]
+        rows = cursor.fetchall()
+
+        return columns, rows
     
     def commit(self):
         try:
