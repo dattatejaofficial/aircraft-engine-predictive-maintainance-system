@@ -44,6 +44,19 @@ class DatabaseManager:
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)
     
+    def execute_many(self, query : str, params : list):
+        try:
+            if self.connection is None:
+                self.connect()
+            
+            cursor = self.connection.cursor()
+            cursor.executemany(query, params)
+
+            return cursor
+        
+        except Exception as e:
+            raise PredicitiveMaintainanceException(e, sys)
+    
     def commit(self):
         try:
             if self.connection:

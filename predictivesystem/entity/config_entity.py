@@ -133,3 +133,15 @@ class DataTransformationConfig:
         self.engine_column = data_transformation_config['engine_column']
         self.cycle_column = data_transformation_config['cycle_column']
         self.target_cap = data_transformation_config['target_cap']
+
+class DataLoadingConfig:
+    def __init__(self, database_config : DatabaseConfig, data_loader_config_file_path = "configs/etl_config.yaml"):
+        with open(data_loader_config_file_path,'r') as file:
+            config = yaml.safe_load(file)
+        
+        data_loading_config = config['data_loading_details']
+        
+        self.database_config = database_config
+        self.train_features_table_name = data_loading_config['train_features_table_name']
+        self.test_features_table_name = data_loading_config['test_features_table_name']
+        self.test_targets_table_name = data_loading_config['test_targets_table_name']

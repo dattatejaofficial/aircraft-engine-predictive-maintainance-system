@@ -146,7 +146,7 @@ class DataTransformation:
 
             train_df[f'{target_col}_scaled'] = target_scaler.fit_transform(train_df[[target_cap_column]])
 
-            train_df = train_df.drop(columns=[target_col, engine_col, cycle_col])
+            train_df = train_df.drop(columns=[target_col])
             
             logging.info(f'Added {target_col} to the Training Data, Capped and Scaled')
 
@@ -202,8 +202,7 @@ class DataTransformation:
                 os.makedirs(self.data_transformation_config.transformed_data_dir, exist_ok=True)
 
                 transformed_train_data.to_csv(self.data_transformation_config.transformed_train_data_path, index=False)
-                
-                transformed_test_data = transformed_test_data.drop(columns = [self.data_transformation_config.engine_column, self.data_transformation_config.cycle_column])
+
                 transformed_test_data.to_csv(self.data_transformation_config.transformed_test_data_path, index=False)
 
                 test_target_data.to_csv(self.data_transformation_config.transformed_test_target_path, index=False)

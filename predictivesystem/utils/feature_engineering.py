@@ -60,7 +60,7 @@ class FeatureExtraction:
                 grp = df.groupby(engine_col)[col]
                 roll = grp.rolling(window=window, min_periods=1)
 
-                new_cols[f'{col}_rstd_{window}'] = roll.std().fillna(0).reset_index(level=0, drop=True)
+                new_cols[f'{col}_std_{window}'] = roll.std().fillna(0).reset_index(level=0, drop=True)
             
             return pd.concat([df, pd.DataFrame(new_cols, index=df.index)], axis=1)
         

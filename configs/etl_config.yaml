@@ -44,3 +44,8 @@ data_transformation_details:
   engine_column : 'engine_id'
   cycle_column : 'cycle'
   target_cap : 125
+
+data_loading_details:
+  train_features_table_name: train_features
+  test_features_table_name: test_features
+  test_targets_table_name: test_targets

@@ -2,15 +2,23 @@ import sys
 from predictivesystem.logging.logger import logging
 from predictivesystem.exception.exception import PredicitiveMaintainanceException
 
-from predictivesystem.entity.config_entity import ConfigurationManager, DataExtractionConfig, DataTransformationConfig
+from predictivesystem.entity.config_entity import (
+    ConfigurationManager,
+    DatabaseConfig,
+    DataExtractionConfig,
+    DataTransformationConfig,
+    DataLoadingConfig)
+
 from predictivesystem.entity.artifact_entity import DataExtractionArtifact, DataTransformationArtifact
 
 from predictivesystem.components.etl.data_extraction import DataExtraction
 from predictivesystem.components.etl.data_transformation import DataTransformation
+from predictivesystem.components.etl.data_loading import DataLoader
 
 class ETLPipeline:
     def __init__(self):
         self.config_manager = ConfigurationManager()
+        self.database_config = DatabaseConfig()
     
     def start_data_extraction(self) -> DataExtractionArtifact:
         try:
@@ -34,11 +42,24 @@ class ETLPipeline:
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)
     
+    def start_data_loading(self, data_transformation_artifact : DataTransformationArtifact) -> None:
+        try:
+            data_loading_config = DataLoadingConfig(database_config = self.database_config)
+            data_loading = DataLoader(data_transformation_artifact = data_transformation_artifact, data_loading_config = data_loading_config)
+            
+            data_loading.initiate_data_loading()
+
+        except Exception as e:
+            raise PredicitiveMaintainanceException(e, sys)
+    
     def run_pipeline(self):
         try:
             logging.info("Initiating ETL Process")
             data_extraction_artifact = self.start_data_extraction()
             data_transformation_artifact = self.start_data_transformation(data_extraction_artifact)
+            data_loading_artifact = self.start_data_loading(data_transformation_artifact)
+
+            return data_loading_artifact
         
         except Exception as e:
             raise PredicitiveMaintainanceException(e,sys)
