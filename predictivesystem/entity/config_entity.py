@@ -261,3 +261,24 @@ class ModelTrainingConfig:
         self.xgboost_config = model_training_config['xgboost']
 
         self.feature_store = model_training_config['feature_store']
+
+class ModelFinalizingConfig:
+    def __init__(self, configuration_manager : ConfigurationManager, model_finalizing_config_file_path = 'configs/ml_config.yaml'):
+        with open(model_finalizing_config_file_path, 'r') as file:
+            config = yaml.safe_load(file)
+        
+        model_finalizing_config = config['model_finalizer_details']
+
+        self.model_finalizer_dir = os.path.join(
+            configuration_manager.ml_artifact_dir,
+            model_finalizing_config['model_finalizer_dir']
+        )
+
+        self.model_promotion_report_dir = os.path.join(
+            self.model_finalizer_dir,
+            model_finalizing_config['model_promotion_report_dir']
+        )
+        self.model_promotion_report_path = os.path.join(
+            self.model_promotion_report_dir,
+            model_finalizing_config['model_promotion_report_path']
+        )

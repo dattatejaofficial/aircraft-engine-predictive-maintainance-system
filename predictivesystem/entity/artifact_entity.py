@@ -33,3 +33,10 @@ class ModelTrainerArtifact:
     evaluation_report_path : str
     run_id : str
     experiment_id : str
+    registered_model_name : str
+
+@dataclass
+class ModelFinalizerArtifact:
+    model_promotion_report_path : str
+    promoted_model_uri : str
+    promoted_run_id : str

@@ -240,6 +240,10 @@ class ModelTrainer:
         try:
             logging.info("Initiating Model Training")
 
+            if self.data_validation_artifact.validation_status == "FAIL":
+                logging.info("Model Training is stopped because of Data Validation failure")
+                return
+
             train_data = read_csv_file(self.data_validation_artifact.validated_train_data_path)
             test_data = read_csv_file(self.data_validation_artifact.validated_test_data_path)
             test_target_data = read_csv_file(self.data_validation_artifact.validated_test_target_path)
@@ -306,7 +310,8 @@ class ModelTrainer:
             model_trainer_artifact = ModelTrainerArtifact(
                 evaluation_report_path=self.model_training_config.evaluation_report_path,
                 run_id=run_id,
-                experiment_id=exp_id
+                experiment_id=exp_id,
+                registered_model_name=self.mlflow_config['registered_model_name']
             )
 
             return model_trainer_artifact
