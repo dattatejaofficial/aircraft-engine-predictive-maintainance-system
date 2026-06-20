@@ -1,0 +1,473 @@
+train:
+  engine_id:
+    dtype: int64
+  
+  cycle:
+    dtype: int64
+  
+  sensor_2_norm:
+    dtype: float64
+  
+  sensor_3_norm:
+    dtype: float64
+  
+  sensor_4_norm:
+    dtype: float64
+  
+  sensor_7_norm:
+    dtype: float64
+  
+  sensor_8_norm:
+    dtype: float64
+  
+  sensor_9_norm:
+    dtype: float64
+  
+  sensor_11_norm:
+    dtype: float64
+  
+  sensor_12_norm:
+    dtype: float64
+  
+  sensor_13_norm:
+    dtype: float64
+  
+  sensor_14_norm:
+    dtype: float64
+  
+  sensor_15_norm:
+    dtype: float64
+  
+  sensor_17_norm:
+    dtype: float64
+  
+  sensor_20_norm:
+    dtype: float64
+  
+  sensor_21_norm:
+    dtype: float64
+  
+  cycle_count:
+    dtype: int64
+  
+  cycle_count_norm:
+    dtype: float64
+  
+  sensor_2_std_15:
+    dtype: float64
+  
+  sensor_3_std_15:
+    dtype: float64
+  
+  sensor_4_std_15:
+    dtype: float64
+  
+  sensor_7_std_15:
+    dtype: float64
+
+  sensor_8_std_15:
+    dtype: float64
+  
+  sensor_9_std_15:
+    dtype: float64
+  
+  sensor_11_std_15:
+    dtype: float64
+  
+  sensor_12_std_15:
+    dtype: float64
+  
+  sensor_13_std_15:
+    dtype: float64
+  
+  sensor_14_std_15:
+    dtype: float64
+  
+  sensor_15_std_15:
+    dtype: float64
+  
+  sensor_17_std_15:
+    dtype: float64
+  
+  sensor_20_std_15:
+    dtype: float64
+  
+  sensor_21_std_15:
+    dtype: float64
+  
+  sensor_2_delta3:
+    dtype: float64
+  
+  sensor_3_delta3:
+    dtype: float64
+  
+  sensor_4_delta3:
+    dtype: float64
+  
+  sensor_7_delta3:
+    dtype: float64
+  
+  sensor_8_delta3:
+    dtype: float64
+  
+  sensor_9_delta3:
+    dtype: float64
+  
+  sensor_11_delta3:
+    dtype: float64
+  
+  sensor_12_delta3:
+    dtype: float64
+  
+  sensor_13_delta3:
+    dtype: float64
+  
+  sensor_14_delta3:
+    dtype: float64
+  
+  sensor_15_delta3:
+    dtype: float64
+  
+  sensor_17_delta3:
+    dtype: float64
+  
+  sensor_20_delta3:
+    dtype: float64
+  
+  sensor_21_delta3:
+    dtype: float64
+  
+  sensor_2_slope20:
+    dtype: float64
+  
+  sensor_3_slope20:
+    dtype: float64
+  
+  sensor_4_slope20:
+    dtype: float64
+  
+  sensor_7_slope20:
+    dtype: float64
+  
+  sensor_8_slope20:
+    dtype: float64
+  
+  sensor_9_slope20:
+    dtype: float64
+  
+  sensor_11_slope20:
+    dtype: float64
+  
+  sensor_12_slope20:
+    dtype: float64
+  
+  sensor_13_slope20:
+    dtype: float64
+  
+  sensor_14_slope20:
+    dtype: float64
+  
+  sensor_15_slope20:
+    dtype: float64
+  
+  sensor_17_slope20:
+    dtype: float64
+  
+  sensor_20_slope20:
+    dtype: float64
+  
+  sensor_21_slope20:
+    dtype: float64
+  
+  health_index:
+    dtype: float64
+  
+  sensor_2_absdev:
+    dtype: float64
+  
+  sensor_3_absdev:
+    dtype: float64
+  
+  sensor_4_absdev:
+    dtype: float64
+  
+  sensor_7_absdev:
+    dtype: float64
+  
+  sensor_8_absdev:
+    dtype: float64
+  
+  sensor_9_absdev:
+    dtype: float64
+  
+  sensor_11_absdev:
+    dtype: float64
+  
+  sensor_12_absdev:
+    dtype: float64
+  
+  sensor_13_absdev:
+    dtype: float64
+  
+  sensor_14_absdev:
+    dtype: float64
+  
+  sensor_15_absdev:
+    dtype: float64
+  
+  sensor_17_absdev:
+    dtype: float64
+  
+  sensor_20_absdev:
+    dtype: float64
+  
+  sensor_21_absdev:
+    dtype: float64
+  
+  failure_window:
+    dtype: int64
+  
+  RUL_capped:
+    dtype: int64
+  
+  RUL_scaled:
+    dtype: float64
+
+test:
+  engine_id:
+    dtype: int64
+  
+  cycle:
+    dtype: int64
+  
+  sensor_2_norm:
+    dtype: float64
+  
+  sensor_3_norm:
+    dtype: float64
+  
+  sensor_4_norm:
+    dtype: float64
+  
+  sensor_7_norm:
+    dtype: float64
+  
+  sensor_8_norm:
+    dtype: float64
+  
+  sensor_9_norm:
+    dtype: float64
+  
+  sensor_11_norm:
+    dtype: float64
+  
+  sensor_12_norm:
+    dtype: float64
+  
+  sensor_13_norm:
+    dtype: float64
+  
+  sensor_14_norm:
+    dtype: float64
+  
+  sensor_15_norm:
+    dtype: float64
+  
+  sensor_17_norm:
+    dtype: float64
+  
+  sensor_20_norm:
+    dtype: float64
+  
+  sensor_21_norm:
+    dtype: float64
+  
+  cycle_count:
+    dtype: int64
+  
+  cycle_count_norm:
+    dtype: float64
+  
+  sensor_2_std_15:
+    dtype: float64
+  
+  sensor_3_std_15:
+    dtype: float64
+  
+  sensor_4_std_15:
+    dtype: float64
+  
+  sensor_7_std_15:
+    dtype: float64
+
+  sensor_8_std_15:
+    dtype: float64
+  
+  sensor_9_std_15:
+    dtype: float64
+  
+  sensor_11_std_15:
+    dtype: float64
+  
+  sensor_12_std_15:
+    dtype: float64
+  
+  sensor_13_std_15:
+    dtype: float64
+  
+  sensor_14_std_15:
+    dtype: float64
+  
+  sensor_15_std_15:
+    dtype: float64
+  
+  sensor_17_std_15:
+    dtype: float64
+  
+  sensor_20_std_15:
+    dtype: float64
+  
+  sensor_21_std_15:
+    dtype: float64
+  
+  sensor_2_delta3:
+    dtype: float64
+  
+  sensor_3_delta3:
+    dtype: float64
+  
+  sensor_4_delta3:
+    dtype: float64
+  
+  sensor_7_delta3:
+    dtype: float64
+  
+  sensor_8_delta3:
+    dtype: float64
+  
+  sensor_9_delta3:
+    dtype: float64
+  
+  sensor_11_delta3:
+    dtype: float64
+  
+  sensor_12_delta3:
+    dtype: float64
+  
+  sensor_13_delta3:
+    dtype: float64
+  
+  sensor_14_delta3:
+    dtype: float64
+  
+  sensor_15_delta3:
+    dtype: float64
+  
+  sensor_17_delta3:
+    dtype: float64
+  
+  sensor_20_delta3:
+    dtype: float64
+  
+  sensor_21_delta3:
+    dtype: float64
+  
+  sensor_2_slope20:
+    dtype: float64
+  
+  sensor_3_slope20:
+    dtype: float64
+  
+  sensor_4_slope20:
+    dtype: float64
+  
+  sensor_7_slope20:
+    dtype: float64
+  
+  sensor_8_slope20:
+    dtype: float64
+  
+  sensor_9_slope20:
+    dtype: float64
+  
+  sensor_11_slope20:
+    dtype: float64
+  
+  sensor_12_slope20:
+    dtype: float64
+  
+  sensor_13_slope20:
+    dtype: float64
+  
+  sensor_14_slope20:
+    dtype: float64
+  
+  sensor_15_slope20:
+    dtype: float64
+  
+  sensor_17_slope20:
+    dtype: float64
+  
+  sensor_20_slope20:
+    dtype: float64
+  
+  sensor_21_slope20:
+    dtype: float64
+  
+  health_index:
+    dtype: float64
+  
+  sensor_2_absdev:
+    dtype: float64
+  
+  sensor_3_absdev:
+    dtype: float64
+  
+  sensor_4_absdev:
+    dtype: float64
+  
+  sensor_7_absdev:
+    dtype: float64
+  
+  sensor_8_absdev:
+    dtype: float64
+  
+  sensor_9_absdev:
+    dtype: float64
+  
+  sensor_11_absdev:
+    dtype: float64
+  
+  sensor_12_absdev:
+    dtype: float64
+  
+  sensor_13_absdev:
+    dtype: float64
+  
+  sensor_14_absdev:
+    dtype: float64
+  
+  sensor_15_absdev:
+    dtype: float64
+  
+  sensor_17_absdev:
+    dtype: float64
+  
+  sensor_20_absdev:
+    dtype: float64
+  
+  sensor_21_absdev:
+    dtype: float64
+
+test_target:
+  engine_id:
+    dtype: int64
+  
+  RUL:
+    dtype: int64
+  
+  RUL_capped:
+    dtype: int64
+  
+  RUL_scaled:
+    dtype: float64

@@ -161,6 +161,18 @@ class DataTransformation:
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)
     
+    def _add_train_feature(self, df: pd.DataFrame) -> pd.DataFrame:
+        try:
+            target_cap_column = f'{self.data_transformation_config.target_column}_capped'
+            failure_window = self.data_transformation_config.failure_window
+            df = df.copy()
+            df['failure_window'] = (df[target_cap_column] <= failure_window).astype(int)
+
+            return df
+        
+        except Exception as e:
+            raise PredicitiveMaintainanceException(e, sys)
+    
     def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
             logging.info("Initiating Data Transformation")
@@ -198,6 +210,7 @@ class DataTransformation:
                 logging.info("Performed Feature Extraction on Training and Testing Data")
 
                 transformed_train_data, test_target_data, target_scaler = self._transform_target_data(transformed_train_data, test_target)
+                transformed_train_data = self._add_train_feature(transformed_train_data)
 
                 os.makedirs(self.data_transformation_config.transformed_data_dir, exist_ok=True)
 
@@ -221,10 +234,11 @@ class DataTransformation:
 
             os.makedirs(self.data_transformation_config.validation_report_dir, exist_ok=True)
             validation_report_path = self.data_transformation_config.validation_report_path
-            logging.info("Saved the Validation Report")
 
             with open(validation_report_path,'w') as file:
                 json.dump(self.report, file, indent=4)
+
+            logging.info("Saved the Validation Report")
             
             data_transformation_artifact = DataTransformationArtifact(
                 validation_status=self.report['status'],

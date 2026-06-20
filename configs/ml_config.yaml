@@ -11,3 +11,16 @@ data_ingestion_details:
   ingested_test_target_path : test_data_target.csv
 
   exclude_columns : ['created_at']
+
+data_validation_details:
+  data_schema_dir: data_schema
+  data_schema_path: ingested_data_schema.yaml
+  
+  data_validation_dir: data_validation
+  validated_data_dir: data
+  validation_report_dir: reports
+
+  validated_train_features_path: validated_train_features.csv
+  validated_test_features_path: validated_test_features.csv
+  validated_test_targets_path: validated_test_targets.csv
+  validation_report_path: ingested_data_validation_report.json

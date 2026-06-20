@@ -1,6 +1,5 @@
 TRAIN_FEATURES = """
 CREATE TABLE IF NOT EXISTS train_features (
-
 engine_id INT NOT NULL,
 cycle INT NOT NULL,
 sensor_2_norm FLOAT,
@@ -76,8 +75,9 @@ sensor_15_absdev FLOAT,
 sensor_17_absdev FLOAT,
 sensor_20_absdev FLOAT,
 sensor_21_absdev FLOAT,
-RUL_capped FLOAT,
+RUL_capped INT,
 RUL_scaled FLOAT,
+failure_window TINYINT(1),
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (engine_id, cycle)
 );
@@ -169,7 +169,7 @@ TEST_TARGETS = """
 CREATE TABLE IF NOT EXISTS test_targets (
 engine_id INT NOT NULL,
 RUL INT,
-RUL_capped FLOAT,
+RUL_capped INT,
 RUL_scaled FLOAT,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (engine_id)

@@ -52,5 +52,13 @@ class DataIngestion:
 
             logging.info("Saved Ingested Data")
 
+            data_ingestion_artifact = DataIngestionArtifact(
+                ingested_train_data_path=self.data_ingestion_config.ingested_train_data_path,
+                ingested_test_data_path=self.data_ingestion_config.ingested_test_data_path,
+                ingested_test_target_path=self.data_ingestion_config.ingested_test_target_path
+            )
+
+            return data_ingestion_artifact
+
         except Exception as e:
             raise PredicitiveMaintainanceException(e, sys)

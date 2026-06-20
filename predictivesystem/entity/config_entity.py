@@ -136,6 +136,7 @@ class DataTransformationConfig:
         self.engine_column = data_transformation_config['engine_column']
         self.cycle_column = data_transformation_config['cycle_column']
         self.target_cap = data_transformation_config['target_cap']
+        self.failure_window = data_transformation_config['failure_window']
 
 class DataLoadingConfig:
     def __init__(self, database_config : DatabaseConfig, data_loader_config_file_path = "configs/etl_config.yaml"):
@@ -184,3 +185,48 @@ class DataIngestionConfig:
         )
 
         self.exclude_columns = data_ingestion_config['exclude_columns']
+
+class DataValidationConfig:
+    def __init__(self, configuration_manager : ConfigurationManager, data_validation_config_file_path = 'configs/ml_config.yaml'):
+        with open(data_validation_config_file_path,'r') as file:
+            config = yaml.safe_load(file)
+        
+        validation_config = config['data_validation_details']
+
+        self.data_schema_path = os.path.join(
+            validation_config['data_schema_dir'],
+            validation_config['data_schema_path']
+        )
+
+        self.data_validation_dir = os.path.join(
+            configuration_manager.ml_artifact_dir,
+            validation_config['data_validation_dir']
+        )
+        
+        self.validated_data_dir = os.path.join(
+            self.data_validation_dir,
+            validation_config['validated_data_dir']
+        )
+
+        self.validation_reports_dir = os.path.join(
+            self.data_validation_dir,
+            validation_config['validation_report_dir']
+        )
+
+        self.validated_train_features_path = os.path.join(
+            self.validated_data_dir,
+            validation_config['validated_train_features_path']
+        )
+        self.validated_test_features_path = os.path.join(
+            self.validated_data_dir,
+            validation_config['validated_test_features_path']
+        )
+        self.validated_test_targets_path = os.path.join(
+            self.validated_data_dir,
+            validation_config['validated_test_targets_path']
+        )
+
+        self.validation_report_path = os.path.join(
+            self.validation_reports_dir,
+            validation_config['validation_report_path']
+        )
