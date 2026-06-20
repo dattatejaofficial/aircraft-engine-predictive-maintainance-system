@@ -230,3 +230,34 @@ class DataValidationConfig:
             self.validation_reports_dir,
             validation_config['validation_report_path']
         )
+
+class ModelTrainingConfig:
+    def __init__(self, configuration_manager : ConfigurationManager, model_training_config_file_path = 'configs/ml_config.yaml'):
+        with open(model_training_config_file_path, 'r') as file:
+            config = yaml.safe_load(file)
+        
+        model_training_config = config['model_training_details']
+
+        self.model_training_dir = os.path.join(
+            configuration_manager.ml_artifact_dir,
+            model_training_config['model_training_dir']
+        )
+        self.evaluation_report_dir = os.path.join(
+            self.model_training_dir,
+            model_training_config['evaluation_report_dir']
+        )
+        self.evaluation_report_path = os.path.join(
+            self.model_training_dir,
+            model_training_config['evaluation_report_path']
+        )
+
+        self.sequence_length = model_training_config['sequence_length']
+        self.failure_threshold = model_training_config['failure_threshold']
+        self.random_state = model_training_config['random_state']
+        self.engine_id_column = model_training_config['engine_id_column']
+
+        self.mlflow_config = model_training_config['mlflow']
+        self.lstm_config = model_training_config['lstm']
+        self.xgboost_config = model_training_config['xgboost']
+
+        self.feature_store = model_training_config['feature_store']

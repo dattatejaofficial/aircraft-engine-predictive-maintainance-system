@@ -4,7 +4,7 @@ import json
 from typing import Literal
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DataValidationConfig
 from predictivesystem.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
@@ -49,7 +49,7 @@ class DataValidation:
                 self.report[dataset_name]['warnings']['extra_columns'] = list(extra_columns)
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
 
     def _validate_dtypes(self, df : pd.DataFrame, dataset_name : Literal['train','test','test_target']) -> None:
         try:
@@ -72,7 +72,7 @@ class DataValidation:
                 self.report[dataset_name]['errors']['dtype_mismatch'] = dtype_errors
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _validate_data(self, df : pd.DataFrame, dataset_name : Literal['train','test','test_target']) -> None:
         try:
@@ -85,7 +85,7 @@ class DataValidation:
             self._validate_dtypes(df, dataset_name)
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
 
     def initiate_data_validation(self) -> DataValidationArtifact:
         try:
@@ -135,4 +135,4 @@ class DataValidation:
             return data_validation_artifact
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

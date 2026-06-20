@@ -1,6 +1,6 @@
 import sys
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.database.database_manager import DatabaseManager
 from predictivesystem.database.database_schema import TRAIN_FEATURES, TEST_FEATURES, TEST_TARGETS
@@ -28,4 +28,4 @@ class DatabaseInitializer:
             logging.info("Disconnecting Database")
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

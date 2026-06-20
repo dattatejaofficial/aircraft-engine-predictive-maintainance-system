@@ -1,6 +1,6 @@
 import sys
 
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 import pandas as pd
 import numpy as np
@@ -27,7 +27,7 @@ class FeatureExtraction:
             return df
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
 
     def normalize_data(self, df : pd.DataFrame, feature_cols : list[str], scaler : MinMaxScaler, fit=False):
         try:
@@ -49,7 +49,7 @@ class FeatureExtraction:
             return pd.concat([df, normed], axis=1)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
         
     def add_rolling_features(self, df : pd.DataFrame, feature_cols : list[str], engine_col : str, window = 15) -> pd.DataFrame:
         try:
@@ -65,7 +65,7 @@ class FeatureExtraction:
             return pd.concat([df, pd.DataFrame(new_cols, index=df.index)], axis=1)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def add_delta_features(self, df : pd.DataFrame, feature_cols : list[str], engine_col : str, lag = 3) -> pd.DataFrame:
         try:
@@ -81,7 +81,7 @@ class FeatureExtraction:
             return pd.concat([df, pd.DataFrame(new_cols, index=df.index)], axis=1)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def __rolling_slope(self, series : pd.Series, window=20) -> pd.Series:
         n = len(series)
@@ -112,7 +112,7 @@ class FeatureExtraction:
             return pd.concat([df, pd.DataFrame(new_cols, index=df.index)], axis=1)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def add_health_index(self, df : pd.DataFrame, degrade_up : list[str], degrade_down : list[str]) -> pd.DataFrame:
         try:
@@ -126,7 +126,7 @@ class FeatureExtraction:
             return df
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def add_baseline_deviations(self, df : pd.DataFrame, feature_cols : list[str], engine_col : str) -> pd.DataFrame:
         try:
@@ -141,7 +141,7 @@ class FeatureExtraction:
             return pd.concat([df, pd.DataFrame(new_cols, index=df.index)], axis=1)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def initiate_feature_extraction(self):
         try:
@@ -154,4 +154,4 @@ class FeatureExtraction:
             return final_df
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

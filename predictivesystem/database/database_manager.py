@@ -1,6 +1,6 @@
 import sys
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DatabaseConfig
 from mysql.connector import connect
@@ -25,7 +25,7 @@ class DatabaseManager:
             return self.connection
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def execute(self, query: str, params: tuple = None):
         try:
@@ -42,7 +42,7 @@ class DatabaseManager:
             return cursor
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def execute_many(self, query : str, params : list):
         try:
@@ -55,7 +55,7 @@ class DatabaseManager:
             return cursor
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
         
     def fetch_one(self, query : str, params : tuple = None):
         try:
@@ -69,7 +69,7 @@ class DatabaseManager:
             return dict(zip(columns, row))
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def fetch_all(self, query : str, params : tuple = None):
         cursor = self.execute(query=query, params=params)
@@ -84,7 +84,7 @@ class DatabaseManager:
                 self.connection.commit()
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def rollback(self):
         try:
@@ -92,7 +92,7 @@ class DatabaseManager:
                 self.connection.rollback()
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def close(self):
         try:
@@ -103,4 +103,4 @@ class DatabaseManager:
                 logging.info("Database connection closed")
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

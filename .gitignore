@@ -3,3 +3,5 @@
 logs
 artifacts
 feature_store
+mlflow.db
+mlruns

@@ -2,7 +2,7 @@ import os
 import sys
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DataExtractionConfig
 from predictivesystem.entity.artifact_entity import DataExtractionArtifact
@@ -18,7 +18,7 @@ class DataExtraction:
             data = pd.read_csv(path, sep=r'\s+', header=None, names = columns)
             return data
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def initiate_data_extraction(self) -> DataExtractionArtifact:
         try:
@@ -57,4 +57,4 @@ class DataExtraction:
             return data_extraction_artifact
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e,sys)
+            raise PredictiveMaintenanceException(e,sys)

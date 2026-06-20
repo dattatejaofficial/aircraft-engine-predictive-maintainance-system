@@ -2,7 +2,7 @@ import os
 import sys
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.database.database_manager import DatabaseManager
 from predictivesystem.entity.config_entity import DataIngestionConfig
@@ -34,7 +34,7 @@ class DataIngestion:
             return df
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
@@ -61,4 +61,4 @@ class DataIngestion:
             return data_ingestion_artifact
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

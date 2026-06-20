@@ -1,7 +1,7 @@
 import sys
 from predictivesystem.logging import logger
 
-class PredicitiveMaintainanceException(Exception):
+class PredictiveMaintenanceException(Exception):
     def __init__(self, error_msg, error_details : sys):
         self.error_msg = error_msg
         _, _, exc_tb = error_details.exc_info()

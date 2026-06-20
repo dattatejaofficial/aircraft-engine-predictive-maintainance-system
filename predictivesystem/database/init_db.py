@@ -1,6 +1,6 @@
 import sys
 
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DatabaseConfig
 from predictivesystem.database.database_manager import DatabaseManager
@@ -15,7 +15,7 @@ def main():
         db_initializer.initialize_database()
 
     except Exception as e:
-        raise PredicitiveMaintainanceException(e, sys)
+        raise PredictiveMaintenanceException(e, sys)
 
 if __name__ == '__main__':
     main()

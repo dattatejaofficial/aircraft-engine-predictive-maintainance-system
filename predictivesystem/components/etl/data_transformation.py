@@ -5,7 +5,7 @@ from typing import Literal
 import pickle
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DataTransformationConfig
 from predictivesystem.entity.artifact_entity import DataTransformationArtifact, DataExtractionArtifact
@@ -55,7 +55,7 @@ class DataTransformation:
                 self.report[dataset_name]['warnings']['extra_columns'] = list(extra_columns)
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _validate_dtypes(self, df: pd.DataFrame, dataset_name : Literal['train','test','target'], column_type : Literal['feature_columns','target_column']) -> None:
         try:
@@ -78,7 +78,7 @@ class DataTransformation:
                 self.report[dataset_name]['errors']['dtype_mismatch'] = dtype_errors
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _validate_data(self, df: pd.DataFrame, dataset_name : Literal['train','test','target'], column_type : Literal['feature_columns','target_column']) -> None:
         try:
@@ -90,7 +90,7 @@ class DataTransformation:
             self._validate_dtypes(df, dataset_name, column_type)
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _clean_data(self, df : pd.DataFrame, drop_duplicates=True) -> pd.DataFrame:
         try:
@@ -107,7 +107,7 @@ class DataTransformation:
             return cleaned_df
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _feature_engineering(self, df : pd.DataFrame, scaler : MinMaxScaler, fit : bool) -> pd.DataFrame:
         try:
@@ -127,7 +127,7 @@ class DataTransformation:
             return features_df
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _transform_target_data(self, train_df : pd.DataFrame, target_df : pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, StandardScaler]:
         try:
@@ -159,7 +159,7 @@ class DataTransformation:
             return train_df, target_df, target_scaler
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def _add_train_feature(self, df: pd.DataFrame) -> pd.DataFrame:
         try:
@@ -171,7 +171,7 @@ class DataTransformation:
             return df
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
@@ -251,4 +251,4 @@ class DataTransformation:
             return data_transformation_artifact
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)

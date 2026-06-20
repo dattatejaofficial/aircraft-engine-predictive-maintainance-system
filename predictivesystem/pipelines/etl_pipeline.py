@@ -1,6 +1,6 @@
 import sys
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import (
     ConfigurationManager,
@@ -29,7 +29,7 @@ class ETLPipeline:
             return data_extraction_artifact
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def start_data_transformation(self, data_extraction_artifact : DataExtractionArtifact) -> DataTransformationArtifact:
         try:
@@ -40,7 +40,7 @@ class ETLPipeline:
             return data_transformation_artifact
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def start_data_loading(self, data_transformation_artifact : DataTransformationArtifact) -> None:
         try:
@@ -50,7 +50,7 @@ class ETLPipeline:
             data_loading.initiate_data_loading()
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def run_pipeline(self):
         try:
@@ -63,7 +63,7 @@ class ETLPipeline:
             return data_loading_artifact
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e,sys)
+            raise PredictiveMaintenanceException(e,sys)
 
 if __name__ == '__main__':
     pipeline = ETLPipeline()

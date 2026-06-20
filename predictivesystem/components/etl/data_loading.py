@@ -1,7 +1,7 @@
 import sys
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import DataLoadingConfig
 from predictivesystem.entity.artifact_entity import DataTransformationArtifact
@@ -31,7 +31,7 @@ class DataLoader:
             logging.info(f'Loaded {len(records)} into {table_name}')
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
         
     def initiate_data_loading(self) -> None:
         try:
@@ -52,7 +52,7 @@ class DataLoader:
 
         except Exception as e:
             self.database_manager.rollback()
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
         
         finally:
             self.database_manager.close()

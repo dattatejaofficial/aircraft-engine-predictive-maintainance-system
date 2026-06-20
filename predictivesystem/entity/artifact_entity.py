@@ -27,3 +27,9 @@ class DataValidationArtifact:
     validated_train_data_path : str
     validated_test_data_path : str
     validated_test_target_path : str
+
+@dataclass
+class ModelTrainerArtifact:
+    evaluation_report_path : str
+    run_id : str
+    experiment_id : str

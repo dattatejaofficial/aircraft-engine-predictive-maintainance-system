@@ -1,18 +1,20 @@
 import sys
 
 from predictivesystem.logging.logger import logging
-from predictivesystem.exception.exception import PredicitiveMaintainanceException
+from predictivesystem.exception.exception import PredictiveMaintenanceException
 
 from predictivesystem.entity.config_entity import (
     ConfigurationManager, 
     DatabaseConfig, 
     DataIngestionConfig,
-    DataValidationConfig
+    DataValidationConfig,
+    ModelTrainingConfig
 )
-from predictivesystem.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
+from predictivesystem.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, ModelTrainerArtifact
 
 from predictivesystem.components.ml.data_ingestion import DataIngestion
 from predictivesystem.components.ml.data_validation import DataValidation
+from predictivesystem.components.ml.model_training import ModelTrainer
 
 class TrainingPipeline:
     def __init__(self):
@@ -28,7 +30,7 @@ class TrainingPipeline:
             return data_ingestion_artifact
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
     
     def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
         try:
@@ -39,16 +41,28 @@ class TrainingPipeline:
             return data_validation_artifact
         
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
+    
+    def start_model_training(self, data_validation_artifact: DataValidationArtifact) -> ModelTrainerArtifact:
+        try:
+            model_trainer_config = ModelTrainingConfig(configuration_manager=self.config_manager)
+            model_trainer = ModelTrainer(data_validation_artifact=data_validation_artifact, model_training_config=model_trainer_config)
+            model_trainer_artifact = model_trainer.initiate_model_training()
+
+            return model_trainer_artifact
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(e, sys)
     
     def run_pipeline(self):
         try:
             logging.info("Starting Training Pipeline")
             data_ingestion_artifact = self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact)
+            model_trainer_artifact = self.start_model_training(data_validation_artifact)
 
         except Exception as e:
-            raise PredicitiveMaintainanceException(e, sys)
+            raise PredictiveMaintenanceException(e, sys)
 
 if __name__ == '__main__':
     pipeline = TrainingPipeline()
