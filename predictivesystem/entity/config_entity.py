@@ -247,7 +247,7 @@ class ModelTrainingConfig:
             model_training_config['evaluation_report_dir']
         )
         self.evaluation_report_path = os.path.join(
-            self.model_training_dir,
+            self.evaluation_report_dir,
             model_training_config['evaluation_report_path']
         )
 

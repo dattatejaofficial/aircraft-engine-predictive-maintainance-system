@@ -37,6 +37,9 @@ class HybridModel(PythonModel):
     
     def _predict_failure_from_rul(self, rul_values : np.ndarray) -> np.ndarray:
         return (rul_values <= self.failure_threshold).astype(int)
+    
+    def _predict_failure_probability(self, clf_X : np.ndarray) -> np.ndarray:
+        return self.classifier_model.predict_proba(clf_X)[:, 1]
 
     def predict(self, context, model_input):
         rul_X = model_input['rul_X']
@@ -47,11 +50,13 @@ class HybridModel(PythonModel):
 
         lstm_failure_prediction = self._predict_failure_from_rul(predicted_rul)
         classifier_prediction = self._predict_failure_window(clf_X)
+        classifier_probability = self._predict_failure_probability(clf_X)
 
         return pd.DataFrame({
             'predicted_rul' : predicted_rul.tolist(),
             'lstm_failure_prediction' : lstm_failure_prediction.tolist(),
-            'classifier_prediction' : classifier_prediction.tolist()
+            'classifier_prediction' : classifier_prediction.tolist(),
+            'classifier_probability' : classifier_probability.tolist()
         })
 
 class MLflowManager:

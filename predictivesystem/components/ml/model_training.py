@@ -242,7 +242,7 @@ class ModelTrainer:
 
             if self.data_validation_artifact.validation_status == "FAIL":
                 logging.info("Model Training is stopped because of Data Validation failure")
-                return
+                raise PredictiveMaintenanceException("Model Training stopped because Data Validation failed", sys)
 
             train_data = read_csv_file(self.data_validation_artifact.validated_train_data_path)
             test_data = read_csv_file(self.data_validation_artifact.validated_test_data_path)

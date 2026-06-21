@@ -44,7 +44,8 @@ class FeatureExtraction:
                 index=df.index
             )
 
-            self.NORM_COLS = normed.columns.to_list()
+            self.SENSOR_NORM_COLS = normed.columns.to_list()
+            self.SENSOR_NORM_COLS.remove('cycle_count_norm')
 
             return pd.concat([df, normed], axis=1)
         
@@ -147,7 +148,7 @@ class FeatureExtraction:
         try:
             df = self.df.copy()
 
-            final_df = df.pipe(self.add_cycle_features, self.CYCLE_COL).pipe(self.normalize_data, self.FEATURE_COLS, self.SCALER, self.FIT).pipe(self.add_rolling_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_delta_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_slope_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_health_index, self.DEGRADE_UP, self.DEGRADE_DOWN).pipe(self.add_baseline_deviations, self.FEATURE_COLS, self.ENGINE_COL)
+            final_df = df.pipe(self.add_cycle_features, self.CYCLE_COL).pipe(self.normalize_data, self.FEATURE_COLS, self.SCALER, self.FIT).pipe(self.add_rolling_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_delta_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_slope_features, self.FEATURE_COLS, self.ENGINE_COL).pipe(self.add_health_index, self.DEGRADE_UP, self.DEGRADE_DOWN).pipe(self.add_baseline_deviations, self.SENSOR_NORM_COLS, self.ENGINE_COL)
 
             final_df.drop(self.EXCLUDE_COLS + self.FEATURE_COLS, inplace=True, axis=1)
 

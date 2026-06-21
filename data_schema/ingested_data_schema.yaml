@@ -182,46 +182,46 @@ train:
   health_index:
     dtype: float64
   
-  sensor_2_absdev:
+  sensor_2_norm_absdev:
     dtype: float64
   
-  sensor_3_absdev:
+  sensor_3_norm_absdev:
     dtype: float64
   
-  sensor_4_absdev:
+  sensor_4_norm_absdev:
     dtype: float64
   
-  sensor_7_absdev:
+  sensor_7_norm_absdev:
     dtype: float64
   
-  sensor_8_absdev:
+  sensor_8_norm_absdev:
     dtype: float64
   
-  sensor_9_absdev:
+  sensor_9_norm_absdev:
     dtype: float64
   
-  sensor_11_absdev:
+  sensor_11_norm_absdev:
     dtype: float64
   
-  sensor_12_absdev:
+  sensor_12_norm_absdev:
     dtype: float64
   
-  sensor_13_absdev:
+  sensor_13_norm_absdev:
     dtype: float64
   
-  sensor_14_absdev:
+  sensor_14_norm_absdev:
     dtype: float64
   
-  sensor_15_absdev:
+  sensor_15_norm_absdev:
     dtype: float64
   
-  sensor_17_absdev:
+  sensor_17_norm_absdev:
     dtype: float64
   
-  sensor_20_absdev:
+  sensor_20_norm_absdev:
     dtype: float64
   
-  sensor_21_absdev:
+  sensor_21_norm_absdev:
     dtype: float64
   
   failure_window:
@@ -417,46 +417,46 @@ test:
   health_index:
     dtype: float64
   
-  sensor_2_absdev:
+  sensor_2_norm_absdev:
     dtype: float64
   
-  sensor_3_absdev:
+  sensor_3_norm_absdev:
     dtype: float64
   
-  sensor_4_absdev:
+  sensor_4_norm_absdev:
     dtype: float64
   
-  sensor_7_absdev:
+  sensor_7_norm_absdev:
     dtype: float64
   
-  sensor_8_absdev:
+  sensor_8_norm_absdev:
     dtype: float64
   
-  sensor_9_absdev:
+  sensor_9_norm_absdev:
     dtype: float64
   
-  sensor_11_absdev:
+  sensor_11_norm_absdev:
     dtype: float64
   
-  sensor_12_absdev:
+  sensor_12_norm_absdev:
     dtype: float64
   
-  sensor_13_absdev:
+  sensor_13_norm_absdev:
     dtype: float64
   
-  sensor_14_absdev:
+  sensor_14_norm_absdev:
     dtype: float64
   
-  sensor_15_absdev:
+  sensor_15_norm_absdev:
     dtype: float64
   
-  sensor_17_absdev:
+  sensor_17_norm_absdev:
     dtype: float64
   
-  sensor_20_absdev:
+  sensor_20_norm_absdev:
     dtype: float64
   
-  sensor_21_absdev:
+  sensor_21_norm_absdev:
     dtype: float64
 
 test_target:

@@ -146,7 +146,7 @@ class ModelFinalizer:
 
                     selected_run_id = candidate_run_id
                     selected_model_uri = candidate_model_uri
-                    selected_version = int(production_model.version)
+                    selected_version = candidate_version
                 
                 else:
                     logging.info('Candidate Rejected')
@@ -154,6 +154,7 @@ class ModelFinalizer:
                     decision = 'rejected'
                     selected_run_id = production_model.run_id
                     selected_model_uri = f'models:/{model_name}@production'
+                    selected_version = int(production_model.version)
             
             report = {
                 'decision' : decision,
