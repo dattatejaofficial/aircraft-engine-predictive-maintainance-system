@@ -126,6 +126,7 @@ class ModelFinalizer:
 
                 selected_run_id = candidate_run_id
                 selected_model_uri = candidate_model_uri
+                selected_version = candidate_version
 
                 production_score = None
             
@@ -145,6 +146,7 @@ class ModelFinalizer:
 
                     selected_run_id = candidate_run_id
                     selected_model_uri = candidate_model_uri
+                    selected_version = int(production_model.version)
                 
                 else:
                     logging.info('Candidate Rejected')
@@ -171,7 +173,8 @@ class ModelFinalizer:
             model_finalizer_artifact = ModelFinalizerArtifact(
                 model_promotion_report_path=self.model_finalizing_config.model_promotion_report_path,
                 promoted_model_uri=selected_model_uri,
-                promoted_run_id = selected_run_id
+                promoted_run_id = selected_run_id,
+                promoted_model_version = selected_version
             )
 
             return model_finalizer_artifact

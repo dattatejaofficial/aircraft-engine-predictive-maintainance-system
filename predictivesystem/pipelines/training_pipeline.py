@@ -9,7 +9,8 @@ from predictivesystem.entity.config_entity import (
     DataIngestionConfig,
     DataValidationConfig,
     ModelTrainingConfig,
-    ModelFinalizingConfig
+    ModelFinalizingConfig,
+    ArtifactPublisherConfig
 )
 from predictivesystem.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, ModelTrainerArtifact, ModelFinalizerArtifact
 
@@ -17,6 +18,7 @@ from predictivesystem.components.ml.data_ingestion import DataIngestion
 from predictivesystem.components.ml.data_validation import DataValidation
 from predictivesystem.components.ml.model_training import ModelTrainer
 from predictivesystem.components.ml.model_finalizer import ModelFinalizer
+from predictivesystem.components.ml.artifact_publisher import ArtifactPublisher
 
 class TrainingPipeline:
     def __init__(self):
@@ -67,6 +69,15 @@ class TrainingPipeline:
         except Exception as e:
             raise PredictiveMaintenanceException(e, sys)
     
+    def start_artifact_publishing(self, model_finalizer_artifact : ModelFinalizerArtifact) -> None:
+        try:
+            artifact_publisher_config = ArtifactPublisherConfig()
+            artifact_publisher = ArtifactPublisher(model_finalizer_artifact=model_finalizer_artifact, artifact_publisher_config=artifact_publisher_config)
+            artifact_publisher.initiate_artifact_publishing()
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(e, sys)
+    
     def run_pipeline(self):
         try:
             logging.info("Starting Training Pipeline")
@@ -74,6 +85,8 @@ class TrainingPipeline:
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact)
             model_trainer_artifact = self.start_model_training(data_validation_artifact)
             model_finalizer_artifact = self.start_model_finalization(model_trainer_artifact)
+            
+            self.start_artifact_publishing(model_finalizer_artifact)
 
         except Exception as e:
             raise PredictiveMaintenanceException(e, sys)

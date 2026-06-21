@@ -72,3 +72,7 @@ model_finalizer_details:
   model_finalizer_dir: model_finalizer
   model_promotion_report_dir: reports
   model_promotion_report_path: model_promotion_report.json
+
+artifact_publisher_details:
+  production_prefix: production
+  

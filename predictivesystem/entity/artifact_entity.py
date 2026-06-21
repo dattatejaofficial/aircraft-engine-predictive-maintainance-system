@@ -40,3 +40,4 @@ class ModelFinalizerArtifact:
     model_promotion_report_path : str
     promoted_model_uri : str
     promoted_run_id : str
+    promoted_model_version : int

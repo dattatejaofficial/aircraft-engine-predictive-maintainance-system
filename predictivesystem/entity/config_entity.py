@@ -282,3 +282,12 @@ class ModelFinalizingConfig:
             self.model_promotion_report_dir,
             model_finalizing_config['model_promotion_report_path']
         )
+
+class ArtifactPublisherConfig:
+    def __init__(self, artifact_publisher_config_file_path = 'configs/ml_config.yaml'):
+        with open(artifact_publisher_config_file_path, 'r') as file:
+            config = yaml.safe_load(file)
+        
+        artifact_publisher_config = config['artifact_publisher_details']
+        
+        self.production_prefix = artifact_publisher_config['production_prefix']
