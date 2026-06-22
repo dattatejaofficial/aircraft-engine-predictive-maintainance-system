@@ -5,3 +5,4 @@ artifacts
 feature_store
 mlflow.db
 mlruns
+backend/.env
