@@ -23,7 +23,7 @@ class HybridModel(PythonModel):
         return predictions
     
     def _inverse_scale_rul(self, scaled_rul : np.ndarray) -> np.ndarray:
-        return self.target_scaler.inverse_transform(scaled_rul.reshape(-1, 1)).flatten()
+        return self.target_scaler.inverse_transform(scaled_rul.reshape(-1, 1)).flatten().astype(int)
     
     def _predict_failure_window(self, clf_X : np.ndarray) -> np.ndarray:
         return self.classifier_model.predict(clf_X)

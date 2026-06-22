@@ -12,7 +12,8 @@ from predictivesystem.entity.config_entity import ModelTrainingConfig
 from predictivesystem.entity.artifact_entity import DataValidationArtifact, ModelTrainerArtifact
 
 from predictivesystem.utils.main_utils import read_csv_file, get_rul_scores, get_classification_scores, load_obj
-from predictivesystem.utils.model_training_utils import create_data_sequences, create_test_data_sequences, LSTMRegressor, AircraftDataset, lstm_model_predictions
+from predictivesystem.utils.model_training_utils import create_data_sequences, create_test_data_sequences, AircraftDataset, lstm_model_predictions
+from predictivesystem.utils.lstm_regressor import LSTMRegressor
 from predictivesystem.utils.mlflow_utils import MLflowManager
 
 import pandas as pd
