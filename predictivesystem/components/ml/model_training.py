@@ -87,13 +87,19 @@ class ModelTrainer:
         try:
             logging.info("Initializing XGBoost classifier")
 
+            negative_count = np.sum(y_train == 0)
+            positive_count = np.sum(y_train == 1)
+
+            scale_pos_weight = negative_count / positive_count
+
             classifier = XGBClassifier(
                 n_estimators = self.xgboost_config['n_estimators'], 
                 max_depth = self.xgboost_config['max_depth'],
                 learning_rate = self.xgboost_config['learning_rate'],
                 subsample = self.xgboost_config['subsample'],
                 colsample_bytree = self.xgboost_config['colsample_bytree'],
-                eval_metric = self.xgboost_config['eval_metric']
+                eval_metric = self.xgboost_config['eval_metric'],
+                scale_pos_weight = scale_pos_weight
             )
             classifier.fit(X_train, y_train)
 
