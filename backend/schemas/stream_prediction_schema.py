@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Optional
 
 class StreamPredictionRequest(BaseModel):
     engine_id : int
@@ -18,16 +17,3 @@ class StreamPredictionRequest(BaseModel):
     sensor_20 : float
     sensor_21 : float
     cycle : int
-
-class StreamPredictionResponse(BaseModel):
-    status: str
-    engine_id: int
-
-    current_sequence_size: Optional[int] = None
-    required_sequence_size: Optional[int] = None
-    remaining_records: Optional[int] = None
-
-    predicted_rul: Optional[int] = None
-    lstm_failure_prediction: Optional[int] = None
-    classifier_prediction: Optional[int] = None
-    classifier_probability: Optional[int] = None

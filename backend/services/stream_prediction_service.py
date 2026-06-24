@@ -1,5 +1,6 @@
 from utils.feature_processor import FeatureProcessor
 from utils.sequence_buffer import SequenceBuffer
+from utils.alert_generator import AlertGenerator
 
 class StreamPredictionService:
     @staticmethod
@@ -27,9 +28,15 @@ class StreamPredictionService:
         prepared_data = FeatureProcessor.prepare_stream_data(df=sequence_df, scaler=scaler, baseline_map=baseline_map)
 
         prediction = model.predict(prepared_data)
+        predicted_rul = prediction['predicted_rul']
+        classifier_probability = prediction['classifier_probability']
+
+        alert = AlertGenerator.generate(rul = predicted_rul, failure_probability=classifier_probability)
 
         return {
             "status" : 'ready',
             "engine_id" : engine_id,
-            **prediction.iloc[0].to_dict()
+            "rul" : predicted_rul,
+            "failure_probability" : classifier_probability,
+            "alert" : alert
         }
