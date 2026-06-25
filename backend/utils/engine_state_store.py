@@ -10,5 +10,8 @@ class EngineStateStore:
 
     def get_all(self):
         return self._states
+    
+    def exists(self, engine_id: int) -> bool:
+        return engine_id in self._states
 
 engine_state_store = EngineStateStore()

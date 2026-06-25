@@ -11,7 +11,7 @@ async def predict_stream(payload: StreamPredictionRequest, request: Request):
         features = payload.model_dump()
         engine_id = features.pop("engine_id")
 
-        result = StreamPredictionService.predict(
+        result = await StreamPredictionService.predict(
             engine_id=engine_id,
             features=features,
             model=request.app.state.hybrid_model,

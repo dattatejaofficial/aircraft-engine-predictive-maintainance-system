@@ -5,6 +5,8 @@ from startup import initialize_backend
 
 from routers.batch_prediction_router import router as batch_router
 from routers.stream_prediction_router import router as stream_router
+from routers.websocket_router import router as websocket_router
+from routers.engine_state_router import router as engine_state_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -20,6 +22,8 @@ app = FastAPI(
 
 app.include_router(batch_router)
 app.include_router(stream_router)
+app.include_router(websocket_router)
+app.include_router(engine_state_router)
 
 @app.get("/")
 async def root():
