@@ -41,16 +41,18 @@ class StreamPredictionService:
         predicted_rul = prediction['predicted_rul']
         classifier_probability = prediction['classifier_probability']
 
-        alert = AlertGenerator.generate(rul = predicted_rul, failure_probability=classifier_probability)
-        print("STEP 5")
+        alert_level, alert_message = AlertGenerator.generate(rul = predicted_rul, failure_probability=classifier_probability)
 
         response = {
             "status" : 'ready',
             "engine_id" : engine_id,
             "cycle" : cycle,
-            "rul" : predicted_rul,
-            "failure_probabilty" : classifier_probability,
-            "alert" : alert
+            "predicted_rul" : predicted_rul,
+            "failure_probability" : classifier_probability,
+            "alert_level" : alert_level,
+            "alert_message" : alert_message,
+
+            **features
         }
 
         engine_state_store.update(engine_id, response)

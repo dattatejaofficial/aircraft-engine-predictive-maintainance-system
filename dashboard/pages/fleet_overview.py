@@ -17,7 +17,6 @@ st.title("✈️ Fleet Overview")
 DashboardState.initialize()
 DashboardState.process_updates()
 
-
 if not websocket_client.is_connected():
     if st.button("Reconnect & Refresh"):
         fleet = api_client.get_all_engines()
@@ -47,7 +46,7 @@ st.divider()
 
 st.subheader("Fleet Status")
 
-EngineTable.render(fleet["engines"])
+EngineTable.render(fleet.get('engines', {}))
 
 st.divider()
 

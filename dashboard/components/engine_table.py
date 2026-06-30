@@ -4,7 +4,7 @@ import streamlit as st
 class EngineTable:
     
     @staticmethod
-    def render(engines: dict, *, show_only_alerts: bool = False, use_container_width: bool = True):
+    def render(engines: dict, *, show_only_alerts: bool = False):
         if not engines:
             st.info("No engine data availables")
             return
@@ -40,4 +40,4 @@ class EngineTable:
         df['Priority'] = df['Alert Level'].map(priority)
         df = df.sort_values(['Priority','Predicted RUL'], ascending=[True, True]).drop(columns="Priority").reset_index(drop=True)
 
-        st.data_editor(df, disabled = True, use_container_width = use_container_width, hide_index=True)
+        st.data_editor(df, disabled = True, width='stretch', hide_index=True)

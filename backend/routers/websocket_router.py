@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter
 from fastapi import WebSocket
 from fastapi import WebSocketDisconnect
@@ -12,7 +13,8 @@ async def websocket_endpoint(websocket: WebSocket):
 
     try:
         while True:
-            await websocket.receive_text()
+            # await websocket.receive_text()
+            await asyncio.sleep(60)
     
     except WebSocketDisconnect:
         manager.disconnect(websocket)

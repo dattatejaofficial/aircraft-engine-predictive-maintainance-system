@@ -13,6 +13,18 @@ st.set_page_config(page_title="Aircraft Engine Predictive Dashboard", page_icon=
 
 st.title("✈️ Aircraft Engine Predictive Maintenance System")
 
+col1, col2 = st.columns([8, 1])
+
+with col2:
+    if st.button("🔄 Refresh"):
+        health = api_client.get_health()
+        fleet = api_client.get_all_engines()
+
+        DashboardState.set_backend_health(health)
+        DashboardState.set_fleet(fleet)
+
+        st.rerun()
+
 DashboardState.initialize()
 DashboardState.process_updates()
 
@@ -29,7 +41,7 @@ if not DashboardState.get_fleet():
 fleet = DashboardState.get_fleet()
 
 metrics = DashboardState.get_dashboard_metrics()
-fleet_df = pd.DataFrame(fleet['engines'].values())
+fleet_df = pd.DataFrame(fleet.get("engines", {}).values())
 
 st.subheader("System Status")
 

@@ -22,14 +22,6 @@ class DashboardWebSocketClient:
             return
         
         update_queue.put(payload['data'])
-        # fleet = DashboardState.get_fleet()
-
-        # if 'engines' not in fleet:
-        #     fleet['engines'] = {}
-        
-        # fleet['engines'][data['engine_id']] = data
-
-        # DashboardState.set_fleet(fleet)
 
     async def _listen(self):
         while self._running:

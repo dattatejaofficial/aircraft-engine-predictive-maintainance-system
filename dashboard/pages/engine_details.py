@@ -14,6 +14,16 @@ st.set_page_config(page_title="Engine Details", page_icon="🛠️", layout="wid
 
 st.title("🛠️ Engine Details")
 
+col1, col2 = st.columns([8, 1])
+
+with col2:
+    if st.button('🔄 Refresh'):
+        
+        fleet = api_client.get_all_engines()
+        DashboardState.set_fleet(fleet)
+
+        st.rerun()
+
 DashboardState.initialize()
 DashboardState.process_updates()
 
@@ -25,6 +35,10 @@ if not DashboardState.get_fleet():
     DashboardState.set_fleet(fleet)
 
 fleet = DashboardState.get_fleet()
+if not fleet.get('engines'):
+    st.info('No engines available')
+    st.stop()
+
 engine_ids = sorted([int(engine_id) for engine_id in fleet['engines'].keys()])
 
 default_engine = DashboardState.get_selected_engine()

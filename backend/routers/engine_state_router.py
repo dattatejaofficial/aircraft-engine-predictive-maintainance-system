@@ -28,3 +28,17 @@ async def get_engine_history(engine_id: int):
         'engine_id' : engine_id,
         'history' : engine_state_store.get_history(engine_id)
     }
+
+@router.get("/{engine_id}/details")
+async def get_engine_details(engine_id : int):
+    if not engine_state_store.exists(engine_id):
+        raise HTTPException(status_code=404, detail=f'Engine {engine_id} not found')
+    
+    history = engine_state_store.get_history(engine_id)
+
+    return {
+        "engine_id" : engine_id,
+        "current" : engine_state_store.get(engine_id),
+        "history" : history,
+        "history_length" : len(history)
+    }

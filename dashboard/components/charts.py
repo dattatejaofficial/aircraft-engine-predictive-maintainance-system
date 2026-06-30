@@ -19,7 +19,7 @@ class DashboardCharts:
             st.info("No prediction data available yet.")
             return
         
-        counts = df['alert_level'].value_counts().rename_axis('Alert').reset_index(name='Count')
+        counts = plot_df['alert_level'].value_counts().rename_axis('Alert').reset_index(name='Count')
 
         fig = px.pie(counts, names='Alert', values='Count', title='Fleet Alert Distribution')
         st.plotly_chart(fig, width='stretch')
@@ -39,7 +39,7 @@ class DashboardCharts:
             st.info("No RUL predictions available yet.")
             return
         
-        fig = px.histogram(df, x='predicted_rul', nbins=20, title='Predicted RUL Distribution')
+        fig = px.histogram(plot_df, x='predicted_rul', nbins=20, title='Predicted RUL Distribution')
         st.plotly_chart(fig, width='stretch')
     
     @staticmethod
